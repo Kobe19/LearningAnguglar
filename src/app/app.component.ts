@@ -8,6 +8,19 @@ import { Component } from '@angular/core';
 export class AppComponent {
   isAuth = false;
 
+  //Pipe Date
+  //lastUpdate = new Date();
+
+  lastUpdate = new Promise(
+    (resolve, reject) => {
+      const date = new Date();
+      setTimeout(
+        () => {
+          resolve(date);
+        }, 2000
+      );
+    }
+  )
   appareils = [
     {
       name: 'Television',
