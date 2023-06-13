@@ -15,7 +15,7 @@ export class AppComponent {
     },
     {
       name: 'PS5',
-      status: 'éteint'
+      status: 'allumé'
     },
     {
       name: 'Ordinateur',
