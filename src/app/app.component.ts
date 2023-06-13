@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'LearnAngular';
+  isAuth = false;
+  constructor() {
+    setTimeout(
+      () => {
+        this.isAuth = true;
+      }, 9000
+    );
+  }
+
+  onAllumer(){
+    console.log('on allume tout ! ')
+  }
 }
