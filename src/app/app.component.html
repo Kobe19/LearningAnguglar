@@ -1,29 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 ms-3">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li routerLinkActive="active">
+        <a class="navbar-brand" routerLink="auth">Authentification</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="navbar-brand" routerLink="appareils">Appareils</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
-      <h2>Mes appareils</h2>
-
-      <p> Mis à jour : {{ lastUpdate | async }}</p>
-
-      <!--
-         - Pipe Date
-        <p> Mis à jour : {{ lastUpdate  | date: 'medium' | uppercase }}</p>
-      -->
-
-      <ul class="list-group">
-        <app-appareil
-          *ngFor="let app of appareils; let i = index"
-          [indexOfAppareil]="i"
-          [appareilName]="app.name"
-          [appareilStatus]="app.status"></app-appareil>
-      </ul>
-      <button class="mt-2 btn btn-success"
-              [disabled]="!isAuth"
-              (click)="onAllumer()">Tout allumer</button>
-
-      <button class="mt-2 ms-2 btn btn-danger"
-              [disabled]="!isAuth"
-              (click)="onEteindre()">Tout éteindre</button>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
