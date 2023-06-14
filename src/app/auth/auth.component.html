@@ -1,1 +1,7 @@
-<p>auth works!</p>
+<button class="mt-2 btn btn-success"
+        *ngIf="!authStatus"
+        (click)="onSignIn()">Connexion</button>
+
+<button class="mt-2 ms-2 btn btn-danger"
+        *ngIf="authStatus"
+        (click)="onSignOut()">Deconnexion</button>
