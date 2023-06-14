@@ -12,13 +12,18 @@
 
       <ul class="list-group">
         <app-appareil
-          *ngFor="let app of appareils"
+          *ngFor="let app of appareils; let i = index"
+          [indexOfAppareil]="i"
           [appareilName]="app.name"
           [appareilStatus]="app.status"></app-appareil>
       </ul>
       <button class="mt-2 btn btn-success"
               [disabled]="!isAuth"
               (click)="onAllumer()">Tout allumer</button>
+
+      <button class="mt-2 ms-2 btn btn-danger"
+              [disabled]="!isAuth"
+              (click)="onEteindre()">Tout éteindre</button>
     </div>
   </div>
 </div>
