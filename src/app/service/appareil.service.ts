@@ -1,5 +1,8 @@
 import {Subject} from "rxjs";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 
+@Injectable()
 export class AppareilService{
 
   appareilSubject = new Subject<any[]>();
@@ -20,6 +23,9 @@ export class AppareilService{
       status: 'éteint'
     }
   ];
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   emitAppareilSubject() {
     this.appareilSubject.next(this.appareils.slice());
@@ -70,5 +76,18 @@ export class AppareilService{
     //Mettre la liste à jour
     this.appareils.push(appareilObject);
     this.emitAppareilSubject();
+  }
+
+  saveAppareilsToServeur(){
+    this.httpClient
+      .put('https://learningangularhttpclientdemo-default-rtdb.europe-west1.firebasedatabase.app/appareils.json', this.appareils)
+      .subscribe({
+        next: () => {
+          console.log('Enregistrement terminé !');
+        },
+        error: (error) => {
+          console.log('Erreur de Sauvegarde !' + error);
+        }
+  })
   }
 }
