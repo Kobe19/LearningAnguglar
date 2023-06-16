@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../service/user.service";
 import {Router} from "@angular/router";
 import {User} from "../models/User.model";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-new-user',
@@ -14,6 +15,7 @@ export class NewUserComponent implements OnInit{
   userForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
+              private authService: AuthService,
               private router: Router) {
   }
   ngOnInit(): void {
@@ -22,10 +24,10 @@ export class NewUserComponent implements OnInit{
 
   initForm(){
     this.userForm = this.formBuilder.group({
-      firstName: '',
-      lastName: '',
-      email: '',
-      drinkPreference: ''
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      drinkPreference: ['', Validators.required]
     })
   }
 
@@ -38,7 +40,7 @@ export class NewUserComponent implements OnInit{
       formValue['drinkPreference']
     );
     this.userService.addUser(newUser);
-    this.router.navigate(['/users']);
+    this.authService.isAuth ? this.router.navigate(['/users']) : this.router.navigate(['/auth']);
   }
 
 }
