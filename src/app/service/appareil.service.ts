@@ -6,23 +6,7 @@ import {HttpClient} from "@angular/common/http";
 export class AppareilService{
 
   appareilSubject = new Subject<any[]>();
-  private appareils = [
-    {
-      id: 1,
-      name: 'Television',
-      status: 'éteint'
-    },
-    {
-      id: 2,
-      name: 'PS5',
-      status: 'allumé'
-    },
-    {
-      id: 3,
-      name: 'Ordinateur',
-      status: 'éteint'
-    }
-  ];
+  private appareils : any[] = [];
 
   constructor(private httpClient: HttpClient) {
   }
@@ -88,6 +72,20 @@ export class AppareilService{
         error: (error) => {
           console.log('Erreur de Sauvegarde !' + error);
         }
-  })
+      })
+  }
+
+  getAppareilsFromServeur(){
+    this.httpClient
+      .get<any[]>('https://learningangularhttpclientdemo-default-rtdb.europe-west1.firebasedatabase.app/appareils.json')
+      .subscribe({
+        next: (response) => {
+          this.appareils = response;
+          this.emitAppareilSubject();
+        },
+        error: (error) => {
+          console.log('Erreur de chargement !' + error);
+        }
+      })
   }
 }

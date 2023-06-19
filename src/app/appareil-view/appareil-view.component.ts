@@ -40,6 +40,7 @@ export class AppareilViewComponent implements OnInit{
         this.appareils = appareils;
       }
     );
+    //this.onFetch();
     //emmettre les appareils
     this.appareilService.emitAppareilSubject();
   }
@@ -55,5 +56,9 @@ export class AppareilViewComponent implements OnInit{
 
   onSave(){
     this.appareilService.saveAppareilsToServeur();
+  }
+
+  onFetch() {
+    this.appareilService.getAppareilsFromServeur();
   }
 }
